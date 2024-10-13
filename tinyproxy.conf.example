@@ -1,0 +1,10 @@
+User nobody
+Group nogroup
+Port 58888
+Timeout 600
+LogLevel Info
+
+# Allow access from multiple IP ranges
+Allow 10.0.0.0/8
+# Add public ips
+# Allow ... 
