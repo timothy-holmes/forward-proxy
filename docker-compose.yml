@@ -15,3 +15,7 @@ services:
       - "traefik.http.services.tinyproxy.loadbalancer.server.port=58888"
     networks:
       - reverse-proxy-public
+
+networks:
+  reverse-proxy-public:
+    external: true
