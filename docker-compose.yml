@@ -1,9 +1,17 @@
-version: '3'
 services:
   tinyproxy:
     image: dannydirect/tinyproxy
     container_name: tinyproxy
     ports:
-      - "8888:8888"
+      - "58888:58888"
     volumes:
       - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tinyproxy.rule=Host(`tp.$DOMAIN`)"
+      - "traefik.http.routers.tinyproxy.entrypoints=websecure"
+      - "traefik.http.routers.tinyproxy.tls.certresolver=myresolver"
+      - "traefik.http.services.tinyproxy.loadbalancer.server.port=58888"
+    networks:
+      - reverse-proxy-public
